@@ -2,15 +2,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
-from app.routers import auth
+from app.routers import auth, upload
 
-Base.metadata.create_all(bind=engine)
-
+# FastAPI App
 app = FastAPI(
     title="AI Resume Analyzer API",
     version="0.1.0"
 )
 
+# Database Tables
+Base.metadata.create_all(bind=engine)
+
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,8 +22,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Router (prefix auth.py me already hai)
+# Routers
 app.include_router(auth.router)
+app.include_router(upload.router)
 
 @app.get("/")
 def home():
