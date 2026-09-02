@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+const API = "https://ai-resume-analyzer-api-5qm8.onrender.com";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import jsPDF from "jspdf";
@@ -46,7 +47,7 @@ function App() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/upload/analyze", {
+      const response = await fetch(`${API}/upload/analyze`, {
         method: "POST",
         body: formData,
       });
@@ -85,7 +86,7 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/upload/match", {
+      const response = await fetch(`${API}/upload/match`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,9 +118,7 @@ function App() {
     setLoadingAI(true);
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/upload/suggestions",
-        {
+      const response = await fetch(`${API}/upload/suggestions`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
