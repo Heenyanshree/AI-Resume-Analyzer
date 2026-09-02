@@ -5,3 +5,5 @@ PyMuPDF
 python-dotenv
 google-genai
 pydantic
+sqlalchemy
+psycopg2-binary
